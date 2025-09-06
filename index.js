@@ -1,5 +1,5 @@
 const express = require('express');
-const connection = require('./DataBase/Connection');
+const connection = require('./DataBase/connection');
 const AdminRoute = require('./routes/Admin.route');
 const PatientsRoute = require('./routes/Patients.route');
 const DoctorsRoute = require('./routes/Doctors.route');
