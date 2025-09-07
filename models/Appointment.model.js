@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const appointmentSchema = mongoose.Schema({
+const appointmentSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users",
@@ -9,7 +9,11 @@ const appointmentSchema = mongoose.Schema({
     doctorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "doctors",
-        required: true,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true
     },
     status: {
         type: String,
