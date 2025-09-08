@@ -27,7 +27,7 @@ const register = async (req, res) => {
             password: hashedPassword,
             phone,
             role,
-            avatar: req.file.filename
+            // avatar: req.file.filename
         })
 
         // newUser.token = token
