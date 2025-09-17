@@ -1,5 +1,6 @@
-const Users = require('../models/Users.model');
-
+const Users= require('../models/Doctors.model');
+const PatientUser=require('../models/Users.model')
+const { validationResult } = require('express-validator');
 const getAllDoctors = async (req, res) => {
     try 
     {
@@ -30,7 +31,7 @@ const getDoctorById = async (req, res) => {
 const getAllPatients = async (req, res) => {
     try 
     {
-        let Patients = await Users.find({},{'__v': false})
+        let Patients = await PatientUser.find({},{'__v': false})
         res.status(200).json(Patients)
     } 
     catch (err) {
@@ -41,7 +42,7 @@ const getAllPatients = async (req, res) => {
 const getPatientById = async (req, res) => {
     try 
     {
-        let Patient = await Users.findById(req.params.patientId,{'__v': false})
+        let Patient = await PatientUser.findById(req.params.patientId,{'__v': false})
                 if (!Patient){
                     return res.status(404).json({ error:'Cannot find Patient by this id' })
                 }
