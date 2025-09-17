@@ -1,0 +1,61 @@
+<div class="modal fade show d-block">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content rounded-4 shadow border-0">
+
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title">Update Appointment</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeForm()"></button>
+      </div>
+
+      <div class="modal-body p-4 bg-light">
+        <form (ngSubmit)="updateAppointment()">
+
+          <!-- Doctor info -->
+          <div *ngIf="doctor" class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+              <h5 class="fw-bold text-primary">{{ doctor.name }}</h5>
+              <small class="text-muted">{{ doctor.specialization }}</small>
+              <p><strong>Description:</strong> {{ doctor.description }}</p>
+              <p>
+                <strong>Available Days:</strong>
+                <span *ngFor="let day of doctor.availableDay" class="badge bg-primary-subtle text-primary rounded-pill me-1">
+                  {{ day }}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Date -->
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="appointment.date"
+                   [matDatepickerFilter]="dateFilter" [min]="minDate" name="date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <small *ngIf="dateError" class="text-danger">{{ dateError }}</small>
+
+          <!-- Status -->
+          <div class="mt-3">
+            <label class="form-label fw-semibold">Status</label>
+            <select class="form-select rounded-pill shadow-sm"
+                    [(ngModel)]="appointment.status" name="status">
+              <option value="pending">⏳ Pending</option>
+              <option value="confirmed">✅ Confirmed</option>
+              <option value="canceled">❌ Canceled</option>
+            </select>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-4 d-flex justify-content-end gap-2">
+            <button type="button" class="btn btn-outline-secondary rounded-pill px-4"
+                    (click)="closeForm()">Cancel</button>
+            <button type="submit" class="btn btn-success rounded-pill px-4">Update</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

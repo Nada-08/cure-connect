@@ -1,0 +1,115 @@
+.category-card .container {
+  max-width: 1234px;
+}
+
+.category-card .wrapper {
+  row-gap: 46px;
+  justify-content: flex-start !important;
+}
+
+.category-card .wrapper .card {
+  border-radius: 12px;
+  width: 16rem;
+  border: 0px;
+  box-shadow: 0px 3px 8px 0px #80808045;
+  transition: transform 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.category-card .wrapper .card:hover {
+  transform: translateY(-7px);
+}
+
+.category-card .wrapper .images img {
+  height: 248px;
+  object-fit: cover;
+  width: 260px;
+  border-radius: 12px 12px 0px 0px;
+}
+
+.category-card .wrapper .images .image-title {
+  bottom: -15px;
+}
+
+.category-card .wrapper .images p {
+  background-color: #00133e;
+  color: white;
+  font-size: 11px;
+  padding: 6px 20px;
+  border-radius: 12px 12px 0px 0px;
+  z-index: 9;
+}
+
+
+.hover-overlay {
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  transform: translateY(100%);
+  transition: transform 0.7s ease;
+  border-radius: 12px 12px 0px 0px;
+}
+
+.category-card .wrapper .images .hover-overlay .overlay-text {
+  border-radius: 7px;
+  padding-bottom: 7px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.category-card .wrapper .images .hover-overlay .overlay-text:hover {
+      background-color: #000a21;
+}
+
+.images:hover .hover-overlay {
+  transform: translateY(0);
+}
+
+/* .category-card .wrapper .images .icons i {
+  color: #c8c8c8;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  font-size: 16px;
+} */
+/*
+.category-card .wrapper .images .icons i:hover {
+  transform: translateY(-1.9px);
+} */
+
+.category-card .wrapper .images {
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card .wrapper .card-body {
+  background-color: #f5f7f9;
+  border-radius: 0px 0px 12px 12px;
+  padding-bottom: 5px;
+}
+
+.category-card .wrapper .card-body h3 {
+  font-size: 1.13rem;
+  color: #00004a;
+}
+
+.category-card .wrapper .card-body .specialty {
+  font-size: 10px;
+  color: #00004a;
+}
+
+.category-card .wrapper .card-body .description {
+  font-size: 10px;
+  color: grey;
+  padding: 10px 20px 3px 0px;
+}
+
+.category-card .wrapper .card-body .availableDate {
+  font-size: 13px;
+}
+
+.category-card .wrapper .card-body .availableDate i {
+  color: #bdd1ff;
+}

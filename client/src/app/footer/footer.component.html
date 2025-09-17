@@ -1,0 +1,63 @@
+<footer class="mt-4">
+  <div class="container-fluid">
+    <div class="wrapper ">
+      <div class="top-footer row justify-content-center pb-4 pt-4 px-3">
+
+        <!-- Logo + Icons -->
+        <div class="logo-icons col-4 mb-1">
+          <div class="logo">LOGO</div>
+          <div class="icons d-flex mb-1">
+            <i class="fa-brands fa-x-twitter"></i>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin-in"></i>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="links col-3 row justify-content-center">
+          <h4>Quick Links</h4>
+          <ul class="d-flex flex-column justify-content-evenly">
+            <li>Home</li>
+            <li>Category 1</li>
+            <li>Category 2</li>
+            <li>Category 3</li>
+            <li>Category 4</li>
+          </ul>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="message col-3 d-flex flex-column">
+          <h4>Contact us</h4>
+          <form class="d-flex flex-column pt-2 gap-3"
+                #contactForm="ngForm"
+                (ngSubmit)="handleSubmit(contactForm)">
+
+            <textarea name="message"
+                      required
+                      placeholder="please enter your message"
+                      ngModel
+                      #message="ngModel"></textarea>
+
+            @if(message.invalid && (message.touched || contactForm.submitted)){
+              @if(message.errors?.['required']){
+                <div id="messageHelp" class="form-text text-danger">
+                  message is required.
+                </div>
+              }
+            }
+
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bottom footer -->
+      <div class="bottom-footer row text-center">
+        <p class="col-12">
+          Copyright © 2025 CureConnect. All Right Reserved
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

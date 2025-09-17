@@ -15,6 +15,12 @@ const DoctorsSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    description: {
+
+        type: String,
+        required: true
+
+    },
     availableDay: {
         type: [String],
         required: true,
@@ -29,4 +35,4 @@ const DoctorsSchema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model("Doctors", DoctorsSchema)
+module.exports = mongoose.model("doctors", DoctorsSchema)

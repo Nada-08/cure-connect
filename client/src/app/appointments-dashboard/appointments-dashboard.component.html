@@ -1,0 +1,133 @@
+<div class="container py-4 mb-4">
+  <div class="d-flex flex-column flex-sm-row gap-2 mb-4">
+    <input type="text" class="search-style" placeholder="Search by doctor ID..." [(ngModel)]="searchQuery"
+      (input)="onSearchChange()">
+    <select class="form-select" [(ngModel)]="selectedFilter" (change)="onFilterChange()">
+      <option value="all">All Appointments</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="pending">Pending</option>
+      <option value="canceled">Cancelled</option>
+    </select>
+  </div>
+
+  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="display-5">My Appointments</h1>
+      <p class="text-secondary">Track and manage your appointments</p>
+    </div>
+    <button class="btn btn-style d-flex ">
+      Add New Appointment
+    </button>
+  </div>
+  <div class="row mb-4 g-3">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card bg-primary h-100 text-white">
+        <div class="card-body">
+          <h5 class="card-title">Total</h5>
+          <p class="display-6">{{ stats.total }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card bg-success h-100 text-white">
+        <div class="card-body">
+          <h5 class="card-title">Confirmed</h5>
+          <p class="display-6">{{ stats.confirmed }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card bg-warning h-100 text-white">
+        <div class="card-body">
+          <h5 class="card-title">Pending</h5>
+          <p class="display-6">{{ stats.pending }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card bg-danger h-100 text-white">
+        <div class="card-body">
+          <h5 class="card-title">Cancelled</h5>
+          <p class="display-6">{{ stats.canceled }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Upcoming Appointments</h5>
+    </div>
+    <div class="appointments-container">
+      <div class="card-body">
+        <div *ngIf="filteredAppointments.length === 0" class="text-center py-4">
+          No appointments found.
+        </div>
+
+        <div *ngFor="let appointment of filteredAppointments | slice:0:5" class="appointment-item">
+          <div class="appointment-info">
+            <strong>ID:</strong> {{ appointment._id }} <br>
+            <small>Doctor: {{ appointment.doctorName || 'Unknown Doctor' }}</small> <br>
+            <small>Patient: {{ appointment.userName || 'Unknown Patient' }}</small>
+          </div>
+
+          <div class="appointment-status-container">
+            <span *ngIf="appointment.status==='confirmed'" class="appointment-status confirmed">✔ Confirmed</span>
+            <span *ngIf="appointment.status==='pending'" class="appointment-status pending">⏳ Pending</span>
+            <span *ngIf="appointment.status==='canceled'" class="appointment-status canceled">✖ Cancelled</span>
+          </div>
+
+          <div class="appointment-time">
+            {{ appointment.date | date:'medium' }}
+          </div>
+
+          <div class="appointment-action">
+            <button class="cancel-btn bg-danger" (click)="cancelAppointment(appointment._id!)">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-appt">View All</button>
+  </div>
+
+  <div class="container mt-4">
+    <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
+      <button class="btn btn-light" (click)="prevMonth()">&#8592;</button>
+      <h4 class="mb-0">
+        {{ months[month] }} {{ year }}
+      </h4>
+      <button class="btn btn-light" (click)="nextMonth()">&#8594;</button>
+    </div>
+
+    <div class="calendar-weekdays d-grid text-center fw-bold" style="grid-template-columns: repeat(7, 1fr);">
+      <div *ngFor="let day of weekdays" class="calendar-cell">
+        {{ day }}
+      </div>
+    </div>
+
+    <div class="calendar-days d-grid mt-2" style="grid-template-columns: repeat(7, 1fr); gap: 5px;">
+      <div *ngFor="let blank of blankDays" class="calendar-cell bg-light"></div>
+
+      <div *ngFor="let day of monthDays" class="calendar-cell rounded p-2 text-start d-flex flex-column">
+        <div class="fw-bold" [ngClass]="hasAppointment(day) ? 'day-active' : ''">
+          {{ day }}
+        </div>
+        <div class="d-flex flex-column gap-1 mt-1">
+          <div *ngFor="let appt of getAppointmentsForDay(day)" class="small text-center">
+            <span class="badge w-100" [ngClass]="{
+                  'bg-success': appt.status === 'confirmed',
+                  'bg-warning text-dark': appt.status === 'pending',
+                  'bg-danger': appt.status === 'canceled'
+                }">
+              Dr: {{ appt.doctorId }}<br>
+              <small>{{ appt.status }}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<section class="category-card pt-5 pb-5">
+  <div class="container">
+    <div class="wrapper row">
+      @for(doctor of doctors ;track $index){
+      <div class=" d-flex align-items-center col-3 justify-content-center">
+        <div class="card">
+          <div class="images position-relative d-flex justify-content-center">
+            <img [src]="doctor.avatar" class="card-img-top" alt="{{ doctor.name }}">
+            <div class="hover-overlay d-flex flex-column justify-content-center align-items-center top-0 left-0 position-absolute">
+              <button class="btn btn-primary rounded-pill px-3"
+                      [routerLink]="['/create-appointment']"
+                      [queryParams]="{ doctorId: doctor._id }">
+                Book Appointment
+              </button>              
+              <!-- <div class="icons d-flex justify-content-center gap-3">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-linkedin-in"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+              </div> -->
+            </div>
+
+            <div class="image-title position-absolute">
+              <p>{{doctor.specialization}}</p>
+            </div>
+          </div>
+          <div class="card-body ps-3">
+            <h3 class="card-title">{{doctor.name}}</h3>
+            <p class="description">{{doctor.description}}</p>
+            <div class="availableDate">
+              <p class="d-flex gap-2 align-items-center"><i
+                  class="fa-solid fa-calendar-days"></i>{{doctor.availableDay.length ? doctor.availableDay.join(' - ') : 'No available days'}}</p>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+

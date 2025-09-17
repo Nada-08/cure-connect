@@ -13,30 +13,43 @@ const getAllDoctors = async (req, res) => {
 }
 
 const getDoctorById = async (req, res) => {
-    try 
-    {
-        let Doctor = await Users.findById(req.params.doctorId,{'__v': false})
-                if (!Doctor){
-                    return res.status(404).json({ error: 'Cannot find Doctor by this id' })
-                }
-                else{
-        res.status(200).json(Doctor)
-                }
-    } 
-    catch (err) {
-        res.status(500).json({ message: 'Error from Server', error: err })
+  try {
+    let doctor = await Users.findById(req.params.doctorId, { '__v': false })
+                            .populate('userId', 'name email role');
+
+    if (!doctor) {
+      return res.status(404).json({ error: 'Cannot find Doctor by this id' });
     }
-}
+
+    const formattedDoctor = {
+      _id: doctor._id,
+      userId: doctor.userId._id,      // keep reference
+      name: doctor.userId.name,       // flatten name
+      specialization: doctor.specialization,
+      licensNum: doctor.licensNum,
+      availableDay: doctor.availableDay,
+      description: doctor.description,
+      avatar: doctor.userId.avatar
+    };
+
+    res.status(200).json(formattedDoctor);
+  } catch (err) {
+    res.status(500).json({ message: 'Error from Server', error: err });
+  }
+};
+
+
 
 const getAllPatients = async (req, res) => {
-    try 
-    {
-        let Patients = await PatientUser.find({},{'__v': false})
-        res.status(200).json(Patients)
-    } 
-    catch (err) {
-        res.status(500).json({ message: 'Error from Server', error: err })
-    }
+  try {
+    const Patients = await PatientUser.find(
+      { role: "Patient" },   // filter by role
+      { __v: 0 }             // projection to exclude __v
+    )
+    res.status(200).json(Patients)
+  } catch (err) {
+    res.status(500).json({ message: "Error from Server", error: err })
+  }
 }
 
 const getPatientById = async (req, res) => {

@@ -31,4 +31,8 @@ userRouter.route('/register').post(upload.single('avatar'), userController.regis
 
 userRouter.route('/login').post(userController.login)
 
+userRouter.route('/me').get(verifyToken, userController.getMe)
+
+userRouter.route('/my-appointments').get(verifyToken, userController.getUserAppointments)
+
 module.exports = userRouter
