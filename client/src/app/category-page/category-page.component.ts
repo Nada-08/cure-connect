@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Doctors } from '../types/doctors';
 import { DoctorsRequestService } from '../services/doctors-request.service';
 import { forkJoin } from 'rxjs';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule, KeyValuePipe } from '@angular/common';
 @Component({
   selector: 'app-category-page',
-  imports: [RouterLink,CommonModule, KeyValuePipe],
+  imports: [RouterLink,CommonModule, KeyValuePipe, RouterOutlet],
   templateUrl: './category-page.component.html',
   styleUrls: ['./category-page.component.css']
 })

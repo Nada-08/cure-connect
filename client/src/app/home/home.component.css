@@ -1,46 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Montserrat:ital@0;1&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css');
-:root{
-    --bg-color:rgb(237, 237, 237);
-    --nav-color:rgb(248, 248, 248);
-    --main-color:#2f4670;
-    --header-bg-color:#d8e1f1;
-    --second-main-color:#4c6992;
-    --text-color:#b9cbe0;
-    --shadow-color:rgba(0, 0, 0, 0.279);
-    --text--other-color:rgb(91, 138, 188);
-    --content-color:rgb(13, 13, 13);
-}
-
-*{
-    font-family: "Afacad", serif;
-}
-#root {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-body{
-    background-color: var(--bg-color) !important;
-    position: relative;
-   height: 200vh;
-
-
-}
-.contain{
-  background-color: var( --header-bg-color);
+.contain {
+  background-color: var(--header-bg-color);
   width: 218vh;
   height: 63vh;
-
 }
-.headline{
+
+.headline {
   position: relative;
   margin-top: 10rem;
-
 }
-.list-style{
-    margin-top: 5rem;
-    display: flex;
+
+.list-style {
+  margin-top: 5rem;
+  display: flex;
 }

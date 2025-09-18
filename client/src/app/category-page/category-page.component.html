@@ -13,7 +13,7 @@
             <img [src]="doctor.avatar" class="card-img-top" alt="{{ doctor.name }}">
             <div
               class="hover-overlay d-flex flex-column justify-content-center align-items-center top-0 left-0 position-absolute">
-              <button class="btn btn-primary rounded-pill px-3" [routerLink]="['/create-appointment']"
+              <button class="btn btn-primary rounded-pill px-3" [routerLink]="['create-appointment']"
                 [queryParams]="{ doctorId: doctor._id }">
                 Add Appointment
               </button>
@@ -40,4 +40,5 @@
     }
   </div>
   }
+<router-outlet></router-outlet>
 </section>

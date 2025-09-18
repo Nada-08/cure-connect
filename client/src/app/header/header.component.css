@@ -2,12 +2,12 @@
   background-color: var( --header-bg-color);
   width: 90vh;
   height: 60vh;
-    clip-path: polygon(0% 0%, 180% 28%, 92% 75%, 51% 98%, 0% 68%, 0% 25%);
-display: flex;
-   margin: 1rem 7rem;
-flex-direction: column;
-position: relative;
-left:21%;
+  clip-path: polygon(0% 0%, 180% 28%, 92% 75%, 51% 98%, 0% 68%, 0% 25%);
+  display: flex;
+  margin: 1rem 7rem;
+  flex-direction: column;
+  position: relative;
+  left:21%;
 
   /* border-radius: 0% 20% 0% 50%; */
 }

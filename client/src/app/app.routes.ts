@@ -25,8 +25,8 @@ export const routes: Routes = [
         title: 'Sign Up'
     },
     {
-        path: 'category-page',
-        // path: 'category-page/:specialization'
+        // path: 'category-page',
+        path: 'category-page/:specialization',
         component: CategoryPageComponent,
         title: "category-page",
     },
