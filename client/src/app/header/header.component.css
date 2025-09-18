@@ -1,83 +1,77 @@
 .outer_container {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   min-height: 80vh;
-  padding: 2rem 5rem;
-  position: relative;
-  overflow: hidden;
+  padding: 2rem;
+  background: #f2eeee; 
 }
 
 .container {
-  flex: 1;
-  background: var(--header-bg-color);
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 3rem 4rem;
-  color: #ffffff; /* 👈 high contrast text */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: space-between;
+  background: #c6d5f5; /* the colored shape */
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
   border-radius: 1rem;
-  transition: transform 0.3s ease;
+  padding: 3rem;
+  max-width: 1200px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-.container h1 {
+.text {
+  flex: 1;
+}
+
+.text h1 {
   font-size: 2.8rem;
-  line-height: 1.2;
   margin-bottom: 1rem;
   font-weight: 800;
-  color: #fdfdfd; /* strong white */
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.25); /* 👈 glow */
+  color: #fff;
 }
 
-.container h1 span {
-  color: var(--text--other-color);
-  font-weight: 900;
+.text h1 span {
+  color: #5a7cbf;
 }
 
-.container p {
+.text p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  max-width: 450px;
-  color: rgba(255,255,255,0.9); /* softer white for body */
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  color: rgba(255,255,255,0.9);
 }
 
-.container button {
+.text button {
+  background: #5a7cbf;
+  color: #fff;
   border: none;
-  width: 9rem;
-  height: 3rem;
+  padding: 0.8rem 2rem;
   border-radius: 30px;
-  color: var(--text-color);
   font-weight: bold;
-  background: var(--second-main-color);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
-.container button:hover {
-  background: var(--main-color);
+.text button:hover {
+  background: #3b5998;
   transform: scale(1.05);
 }
 
-/* Image side */
 .image {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .image img {
   max-height: 500px;
-  width: auto;
+  max-width: 150%;
   object-fit: contain;
   animation: float 3s ease-in-out infinite;
 }
 
-/* Subtle floating animation */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
