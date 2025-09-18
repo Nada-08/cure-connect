@@ -28,7 +28,7 @@
         },
         role: {
             type: String,
-            enum: ["Patient", "admin", "doctor"],
+            enum: ["patient", "admin", "doctor"],
             default: "Patient"
         }
     })

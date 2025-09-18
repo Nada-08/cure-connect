@@ -22,6 +22,8 @@ const register = async (req, res) => {
 
         const hashedPassword = bcrypt.hashSync(password, 7)
 
+        console.log(req.file.filename);
+
         const newUser = new User({
             name,
             email,
@@ -57,6 +59,7 @@ const register = async (req, res) => {
             }, token: token
         })
     } catch (err) {
+        console.log(err);
         res.status(500).json({ message: 'Error from server', error: err })
     }
 }

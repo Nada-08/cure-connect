@@ -1,163 +1,81 @@
-<form [formGroup]="signup"(ngSubmit)="handleSubmit()">
-    <h2>SignUp</h2>
-    <div class="mb-3">
-    <label for="role" class="form-label">Select Role</label>
-    <select 
-    class="style"
-      class="form-control"
-      id="role"
-      formControlName="role"
-    >
+<form [formGroup]="signup" (ngSubmit)="handleSubmit()">
+  <h2>Sign Up</h2>
+
+  <!-- Role -->
+  <div class="mb-3">
+    <label class="form-label">Role</label>
+    <select formControlName="role" class="form-control">
       <option value="" disabled selected>-- Choose a role --</option>
       <option value="doctor">Doctor</option>
       <option value="patient">Patient</option>
       <option value="admin">Admin</option>
     </select>
-    @if(signup.get('role')?.invalid && (signup.get('role')?.touched || submitted)) {
-      @if(signup.get('role')?.errors?.['required']) {
-      <div class="form-text text-danger">Role is required</div>
-    }
-  }
+    <div *ngIf="signup.get('role')?.invalid && (signup.get('role')?.touched || submitted)" class="text-danger">
+      Role is required
+    </div>
   </div>
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input 
-          type="text"
-          class="form-control"
-          id="name"
-          aria-describedby="nameHelp"
-          name="name"
-          formControlName="name"
-          >
-          @if(signup.get('name')?.invalid &&(signup.get('name')?.touched || submitted)) {
-      @if(signup.get('name')?.errors?.['required']) {
-        <div id="emailHelp" class="form-text text-danger">Name is required</div>
-      }
-      @else if(signup.get('name')?.errors?.['minlength']) {
-        <div id="emailHelp" class="form-text text-danger">name must be at least 3 characters</div>
-      }
-  }
+
+  <!-- Name -->
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input type="text" formControlName="name" class="form-control">
+    <div *ngIf="signup.get('name')?.invalid && (signup.get('name')?.touched || submitted)" class="text-danger">
+      Name is required and must be at least 3 characters
     </div>
-    <div class="mb-3">
-  <label for="email" class="form-label">Email</label>
-  <input 
-    type="email"
-    class="form-control"
-    id="email"
-    aria-describedby="emailHelp"
-    formControlName="email"
-  >
-  @if(signup.get('email')?.invalid &&(signup.get('email')?.touched || submitted)) {
-      @if(signup.get('email')?.errors?.['required']) {
-        <div id="emailHelp" class="form-text text-danger">Email is required</div>
-      }
-      @else if(signup.get('email')?.errors?.['email']) {
-        <div id="emailHelp" class="form-text text-danger">Please enter a valid email</div>
-      }
-  }
-</div>
-<div class="mb-3">
-        <label for="username" class="form-label">username</label>
-        <input 
-          type="text"
-          class="form-control"
-          id="username"
-          aria-describedby="nameHelp"
-          name="username"
-          formControlName="username"
-          >
-          @if(signup.get('username')?.invalid &&(signup.get('username')?.touched || submitted)) {
-      @if(signup.get('username')?.errors?.['required']) {
-        <div id="emailHelp" class="form-text text-danger">Name is required</div>
-      }
-      @else if(signup.get('username')?.errors?.['minlength']) {
-        <div id="emailHelp" class="form-text text-danger">name must be at least 3 characters</div>
-      }
-  }
-    </div>
-    <div class="mb-3">
-    <label for="phone" class="form-label">Phone Number</label>
-    <input 
-      type="number"
-      class="form-control"
-      id="phone"
-      formControlName="phone"
-    >
-    @if(signup.get('phone')?.invalid && (signup.get('phone')?.touched || submitted)) {
-      @if(signup.get('phone')?.errors?.['required']) {
-        <div class="form-text text-danger">Phone number is required</div>
-      }
-      @else if(signup.get('phone')?.errors?.['minlength']) {
-        <div class="form-text text-danger">Phone must be at least 10 digits</div>
-      }
-    }
   </div>
-   @if(signup.get('role')?.value === 'doctor') {
-    <div class="mb-3">
-      <label for="specialization" class="form-label">Specialization</label>
-      <input type="text" class="form-control" id="specialization" formControlName="specialization">
-      @if(signup.get('specialization')?.invalid && (signup.get('specialization')?.touched || submitted)) {
-        @if(signup.get('specialization')?.errors?.['required']) {
-        <div class="text-danger">Specialization is required</div>
-      }
-    }
-    </div>
-    <div class="mb-3">
-      <label for="availableDays" class="form-label">Available Days</label>
-      <input type="text" class="form-control" id="availableDays" formControlName="availableDays">
-      @if(signup.get('availableDays')?.invalid && (signup.get('availableDays')?.touched || submitted)) {
-        @if(signup.get('availableDays')?.errors?.['required']) {
-        <div class="text-danger">Available days are required</div>
-      }
-    }
-      <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
-    @if(signup.get('description')?.invalid && (signup.get('description')?.touched || submitted)){
-      @if(signup.get('description')?.errors?.['required']) {
-      <div class="text-danger">Description is required</div>
-  }
-}
-    </div>
-    </div>
-  }
- <div class="mb-3">
-  <label for="password" class="form-label">Password</label>
-  <input 
-    type="password"
-    class="form-control"
-    id="password"
-    formControlName="password"
-  >
-  @if(signup.get('password')?.invalid && (signup.get('password')?.touched || submitted)) {
-    @if(signup.get('password')?.errors?.['required']) {
-      <div class="form-text text-danger">Password is required</div>
-    }
-    @else if(signup.get('password')?.errors?.['minlength']) {
-      <div class="form-text text-danger">Password must be at least 8 characters</div>
-    }
-  }
-</div>
-<div class="mb-3">
-  <label for="confirmPassword" class="form-label">Confirm Password</label>
-  <input 
-    type="password"
-    class="form-control"
-    id="confirmPassword"
-    formControlName="confirmPassword"
-  >
-  @if(signup.get('confirmPassword')?.invalid && (signup.get('confirmPassword')?.touched || submitted)) {
-    @if(signup.get('confirmPassword')?.errors?.['required']) {
-      <div class="form-text text-danger">Confirm Password is required</div>
-    }
-  }
-  @if(signup.get('confirmPassword')?.value !== signup.get('password')?.value && submitted) {
-    <div class="form-text text-danger">Passwords do not match</div>
-  }
-</div>
-<button type="submit" class="btn btn-primary w-100">SignUp</button>
-<a routerLink="/login" class="nav-link" class="link">I have an account</a>
 
+  <!-- Email -->
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" formControlName="email" class="form-control">
+    <div *ngIf="signup.get('email')?.invalid && (signup.get('email')?.touched || submitted)" class="text-danger">
+      Valid email is required
+    </div>
+  </div>
 
+  <!-- Phone -->
+  <div class="mb-3">
+    <label class="form-label">Phone</label>
+    <input type="text" formControlName="phone" class="form-control">
+  </div>
+
+  <!-- Doctor-only fields -->
+  <div *ngIf="signup.get('role')?.value === 'doctor'">
+    <div class="mb-3">
+      <label class="form-label">Specialization</label>
+      <input type="text" formControlName="specialization" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Available Days</label>
+      <div *ngFor="let day of allDays">
+        <input type="checkbox" [value]="day" (change)="toggleDay(day)"> {{ day }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea formControlName="description" class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- Avatar -->
+  <div class="mb-3">
+    <label class="form-label">Avatar</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+  </div>
+
+  <!-- Password -->
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" formControlName="password" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Confirm Password</label>
+    <input type="password" formControlName="confirmPassword" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+  <a routerLink="/login" class="nav-link">I have an account</a>
 </form>
-
