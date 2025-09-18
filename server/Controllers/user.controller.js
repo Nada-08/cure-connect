@@ -22,7 +22,7 @@ const register = async (req, res) => {
 
         const hashedPassword = bcrypt.hashSync(password, 7)
 
-        console.log(req.file.filename);
+        // console.log(req.file.filename);
 
         const newUser = new User({
             name,

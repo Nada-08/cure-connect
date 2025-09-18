@@ -1,60 +1,84 @@
-.container{
-  background-color: var( --header-bg-color);
-  width: 90vh;
-  height: 60vh;
-  clip-path: polygon(0% 0%, 180% 28%, 92% 75%, 51% 98%, 0% 68%, 0% 25%);
-  display: flex;
-  margin: 1rem 7rem;
-  flex-direction: column;
-  position: relative;
-  left:21%;
-
-  /* border-radius: 0% 20% 0% 50%; */
-}
-.container h1{
-  position: relative;
-    left: 5%;
-    top: 10%;
-}
-.container h1 span{
-  color: var( --text--other-color);
-}
-.container p{
-  margin-top: 4rem;
-    /* margin-bottom: 3rem; */
-    margin-left: 1.9rem;
-}
-.container button{
-  border: none;
-  width: 7rem;
-  height: 3rem;
-   margin-top: 2rem;
-    margin-left: 2rem;
-  border-radius: 16px;
-  color: var(--text-color);
-  font-weight: bold;
-  background-color: var(--second-main-color);
-}
-.container button:hover{
-  background-color: var(--main-color);
-}
-
 .outer_container {
   display: flex;
-  position: relative;
-  flex-direction: row;
-
-}
-
-.image {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 80vh;
+  padding: 2rem 5rem;
   position: relative;
   overflow: hidden;
-  height: 350px;
+}
+
+.container {
+  flex: 1;
+  background: var(--header-bg-color);
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 4rem;
+  color: #ffffff; /* 👈 high contrast text */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.container h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  color: #fdfdfd; /* strong white */
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.25); /* 👈 glow */
+}
+
+.container h1 span {
+  color: var(--text--other-color);
+  font-weight: 900;
+}
+
+.container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 450px;
+  color: rgba(255,255,255,0.9); /* softer white for body */
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+
+.container button {
+  border: none;
+  width: 9rem;
+  height: 3rem;
+  border-radius: 30px;
+  color: var(--text-color);
+  font-weight: bold;
+  background: var(--second-main-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.container button:hover {
+  background: var(--main-color);
+  transform: scale(1.05);
+}
+
+/* Image side */
+.image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image img {
-  position: relative;
-  height:500px;
-  left: 17%;
-  top:0%;
+  max-height: 500px;
+  width: auto;
+  object-fit: contain;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Subtle floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
