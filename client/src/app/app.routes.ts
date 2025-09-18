@@ -24,12 +24,12 @@ export const routes: Routes = [
         component: SignupComponent,
         title: 'Sign Up'
     },
-    {
-        // path: 'category-page',
-        path: 'category-page/:specialization',
-        component: CategoryPageComponent,
-        title: "category-page",
-    },
+        {
+            // path: 'category-page',
+            path: 'category-page/:specialization',
+            component: CategoryPageComponent,
+            title: "category-page",
+        },
     {
         path: 'appointments',
         component: AppointmentsDashboardComponent,

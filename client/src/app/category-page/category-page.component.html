@@ -3,7 +3,7 @@
   <div class="container">
     @for(specialization of CategoresDoctors |  keyvalue ;track $index){
     <div class="wrapper row">
-      <h2 class="title">{{specialization.key}}</h2>
+      <h2 class="title">{{specialization.key | uppercase}}</h2>
       <!-- <h2 class="title">Ophthalmology</h2> -->
       <!-- @for(doctor of doctors ;track $index){ -->
       @for(doctor of specialization.value ;track $index){

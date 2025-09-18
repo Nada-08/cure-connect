@@ -5,10 +5,14 @@
         <div class="card-body pt-5">
           <h5 class="card-subtitle mb-2 fw-bold">
             <i class="{{ category.icon }}"></i>
-            {{ category.title }}
+            {{ category.title | uppercase }}
           </h5>
           <p class="card-text mb-5">{{ category.text }}</p>
-          <a href="" class="card-link fw-bold">Go To Category</a>
+          <a 
+            [routerLink]="['/category-page', category.title]"
+            class="card-link fw-bold">
+            Go To Category
+          </a>
         </div>
       </div>
     </div>

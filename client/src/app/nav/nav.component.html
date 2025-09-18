@@ -9,24 +9,27 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto me-auto mb-2 container justify-content-around align-items-center ">
         <li class="logo-special nav-item">
-          <h3 class="logo nav-link m-lg-5 m-3 ps-lg-0 ps-3"><img src="logo.png" class="logopic">Hi,{{name}}</h3>
+          <h3 class="logo nav-link m-lg-2 m-3 ps-lg-0 ps-3"><img src="logo.png" class="logopic"></h3>
         </li>
         <li class="nav-item ">
           <a class="nav-link m-lg-5 m-3 ps-lg-0 ps-3" aria-current="page" [routerLink]="['/']">Home</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link m-lg-5 m-3 ps-lg-0 ps-3" aria-current="page" [routerLink]="['/about']">About</a>
+          <a class="nav-link m-lg-5 m-3 ps-lg-0 ps-3" aria-current="page" [routerLink]="['/login']">Login</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link m-lg-5 m-3 ps-lg-0 ps-3" aria-current="page" [routerLink]="['/signup']">Sign Up</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categories
           </a>
           <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item" [routerLink]="['/category', 'dentist']">Dentist</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/category', 'cardiologist']">Cardiologist</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/category', 'ophthalmology']">ophthalmology</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/category', 'pediatrics']">pediatrics</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/category', 'internal-medicine']">internal medicine</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/category-page', 'dentistry']">Dentistry</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/category-page', 'cardiology']">Cardiology</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/category-page', 'ophthalmology']">ophthalmology</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/category-page', 'pediatrics']">Pediatrics</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/category-page', 'internal-medicine']">Internal Medicine</a></li>
           </ul>
         </li>
         <!-- <li class="nav-item">

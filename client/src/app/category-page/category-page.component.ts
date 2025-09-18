@@ -3,10 +3,10 @@ import { Doctors } from '../types/doctors';
 import { DoctorsRequestService } from '../services/doctors-request.service';
 import { forkJoin } from 'rxjs';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
-import { CommonModule, KeyValuePipe } from '@angular/common';
+import { CommonModule, KeyValuePipe, UpperCasePipe } from '@angular/common';
 @Component({
   selector: 'app-category-page',
-  imports: [RouterLink,CommonModule, KeyValuePipe, RouterOutlet],
+  imports: [RouterLink,CommonModule, KeyValuePipe, RouterOutlet, UpperCasePipe],
   templateUrl: './category-page.component.html',
   styleUrls: ['./category-page.component.css']
 })
