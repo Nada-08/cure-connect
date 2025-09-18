@@ -74,6 +74,7 @@ export class SignupComponent {
       if (values.role === 'doctor') {
         formData.append('specialization', values.specialization);
         formData.append('description', values.description);
+        formData.append('licensNum', values.licenseNum);
         formData.append('availableDay', JSON.stringify(this.availableDays));
       }
       if (this.selectedFile) {
