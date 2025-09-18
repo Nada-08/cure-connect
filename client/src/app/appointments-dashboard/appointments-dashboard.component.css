@@ -264,3 +264,10 @@ p.text-secondary {
   white-space: normal;
   word-wrap: break-word;
 }
+.update-btn{
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  width: 100px;
+  height: 40px;
+}

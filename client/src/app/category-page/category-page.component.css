@@ -2,6 +2,14 @@
   max-width: 1234px;
 }
 
+.category-card .container .title {
+  margin-bottom: 5px;
+  color: #003e6c96;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 0 1.5px #003e6c96;
+}
+
 .category-card .wrapper {
   row-gap: 46px;
   justify-content: flex-start !important;
@@ -32,12 +40,13 @@
 }
 
 .category-card .wrapper .images p {
-  background-color: #00133e;
-  color: white;
-  font-size: 11px;
-  padding: 6px 20px;
-  border-radius: 12px 12px 0px 0px;
-  z-index: 9;
+  /* background-color: #00133e; */
+  background: linear-gradient(135deg, #00355c, #004679, #0069b5, #007cd3) !important;
+  color: white !important;
+  font-size: 11px !important;
+  padding: 6px 20px !important;
+  border-radius: 12px 12px 0px 0px !important;
+  z-index: 9 !important;
 }
 
 
@@ -51,17 +60,16 @@
   border-radius: 12px 12px 0px 0px;
 }
 
-.category-card .wrapper .images .hover-overlay .overlay-text {
-  border-radius: 7px;
-  padding-bottom: 7px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
+.category-card .wrapper .images .hover-overlay button {
+  border-radius: 7px !important;
+  padding-bottom: 7px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  background: linear-gradient(135deg, #00355c, #004679, #0069b5, #007cd3) !important;
+  color: white !important;
+  font-size: 11px !important;
+  border: 0 !;
   transition: all 0.5s ease-in-out;
-}
-
-.category-card .wrapper .images .hover-overlay .overlay-text:hover {
-      background-color: #000a21;
 }
 
 .images:hover .hover-overlay {
@@ -103,7 +111,7 @@
 .category-card .wrapper .card-body .description {
   font-size: 10px;
   color: grey;
-  padding: 10px 20px 3px 0px;
+  padding: 0px 20px 0px 0px;
 }
 
 .category-card .wrapper .card-body .availableDate {
@@ -111,5 +119,5 @@
 }
 
 .category-card .wrapper .card-body .availableDate i {
-  color: #bdd1ff;
+  color: #006ab666;
 }

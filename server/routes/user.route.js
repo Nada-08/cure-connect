@@ -35,4 +35,6 @@ userRouter.route('/me').get(verifyToken, userController.getMe)
 
 userRouter.route('/my-appointments').get(verifyToken, userController.getUserAppointments)
 
+userRouter.route('/:AppointmentId').delete(verifyToken, userController.Delete_Appointment)
+
 module.exports = userRouter

@@ -115,8 +115,7 @@ export class CreateAppointmentComponent {
 
   closeForm() {
     this.formClosed.emit();
-    // Redirect back to categories page
-    this.router.navigate(['/categories']);
+    this.router.navigate(['/category-page']);
   }
 
   private resetForm() {

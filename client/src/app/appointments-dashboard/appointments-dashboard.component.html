@@ -64,11 +64,10 @@
           No appointments found.
         </div>
 
-        <div *ngFor="let appointment of filteredAppointments | slice:0:5" class="appointment-item">
+        <div *ngFor="let appointment of filteredAppointments " class="appointment-item">
           <div class="appointment-info">
-            <strong>ID:</strong> {{ appointment._id }} <br>
-            <small>Doctor: {{ appointment.doctorName || 'Unknown Doctor' }}</small> <br>
-            <small>Patient: {{ appointment.userName || 'Unknown Patient' }}</small>
+            <strong>Doctor: {{ appointment.doctorName || 'Unknown Doctor' }}</strong> <br>
+            <strong>Patient: {{ appointment.userName || 'Unknown Patient' }}</strong>
           </div>
 
           <div class="appointment-status-container">
@@ -77,7 +76,7 @@
             <span *ngIf="appointment.status==='canceled'" class="appointment-status canceled">✖ Cancelled</span>
           </div>
 
-          <div class="appointment-time">
+          <div class="appointment-time me-4">
             {{ appointment.date | date:'medium' }}
           </div>
 
@@ -85,12 +84,15 @@
             <button class="cancel-btn bg-danger" (click)="cancelAppointment(appointment._id!)">
               Cancel
             </button>
+            <button class="update-btn bg-primary ms-2" (click)="updateAppointment(appointment._id!)">
+              Update
+            </button>
           </div>
         </div>
       </div>
     </div>
-
-    <button class="btn-appt">View All</button>
+<!-- 
+    <button class="btn-appt">View All</button> -->
   </div>
 
   <div class="container mt-4">
@@ -118,13 +120,14 @@
         <div class="d-flex flex-column gap-1 mt-1">
           <div *ngFor="let appt of getAppointmentsForDay(day)" class="small text-center">
             <span class="badge w-100" [ngClass]="{
-                  'bg-success': appt.status === 'confirmed',
-                  'bg-warning text-dark': appt.status === 'pending',
-                  'bg-danger': appt.status === 'canceled'
-                }">
-              Dr: {{ appt.doctorId }}<br>
-              <small>{{ appt.status }}</small>
-            </span>
+                'bg-success': appt.status === 'confirmed',
+                'bg-warning text-dark': appt.status === 'pending',
+                'bg-danger': appt.status === 'canceled'
+              }">
+            Dr: {{ appt.doctorName || 'Unknown Doctor' }}
+            Patient: {{ appt.userName || 'Unknown Patient' }}
+          </span>
+
           </div>
         </div>
       </div>

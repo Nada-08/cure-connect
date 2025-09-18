@@ -40,7 +40,7 @@ const register = async (req, res) => {
                 specialization,
                 description,
                 licensNum,
-                availableDay
+                availableDay: JSON.parse(req.body.availableDay)
             })
             await newDoctor.save()
         }

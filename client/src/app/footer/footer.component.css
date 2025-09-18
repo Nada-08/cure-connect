@@ -1,17 +1,12 @@
 footer {
-  /* background-color: #a3a3a30f; */
   padding-top: 30px;
-  /* border-top-left-radius: 30%;
-  border-top-right-radius: 30%; */
-  /* background-color: #00133e; */
   padding-top: 30px;
-  background-color: #00133e;
-  box-shadow: 0px 0px 6px 6px #00133e;
+  background: linear-gradient(135deg, #00365d, #00375f, #00497d, #005693);
+  box-shadow: 0px 0px 6px 6px #004170b8;
 }
 
 footer h4 {
-  /* color: #00001c; */
-  color: #e5e5ff;
+  color: #f3f3ff;
   font-size: 21px;
 }
 
@@ -23,7 +18,7 @@ footer .wrapper .top-footer .links ul {
 }
 
 footer .wrapper .top-footer .links ul li {
-  color: #999DA1;
+  color: #c0c7ce;
   font-weight: 400;
   font-size: 14px;
 }
@@ -35,10 +30,10 @@ footer .wrapper .top-footer .icons {
 footer .wrapper .top-footer .icons i {
   color: #ffffff;
   font-size: 13px;
-  background: #cdcccc5c;
-  width: 28px;
-  border-radius: 4px;
-  height: 28px;
+  background: #9393935c;
+  width: 34px;
+  border-radius: 7px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,13 +43,14 @@ footer .wrapper .top-footer .icons i {
 footer .top-footer form textarea {
   border: 0;
   padding: 5px 14px 7px;
+  font-size: 12px;
   border-radius: 12px;
-  background: #3d4964;
-  color: white;
+  background: #d2d2d2c9;
+  color: #000000;
+  resize: none;
 }
 
 footer .top-footer form button {
-  /* background-color: #a3a3a37a; */
   background-color: #aaaaaa3b;
   border: 0px;
   width: 43%;
@@ -64,13 +60,34 @@ footer .top-footer form button {
   margin-left: 3px;
 }
 
-footer .wrapper .bottom-footer {
-  /* font-size: 11px;
-  color: #999da1e4;
-  padding: 19px 0px 5px 0px;
-  box-shadow: inset 1px 1px 0px 0px #ffffff; */
+footer .top-footer p {
+  color: #bcbcbc;
   font-size: 12px;
-  color: #7f7f7f;
+  padding-right: 23px;
+}
+
+footer .top-footer h2 {
+  color: #e5e5ff;
+  font-size: 18px;
+}
+
+footer .top-footer .logo-icons p {
+  padding-right: 41%;
+}
+
+footer .wrapper .bottom-footer {
+  font-size: 12px;
+  color: #b3b3b3;
   padding: 19px 0px 5px 0px;
-  box-shadow: inset 0px 1px 0px 0px #ffffff91;
+  box-shadow: inset 0px 1px 0px 0px #a3a3a391;
+}
+
+.text-danger {
+  color: rgb(255 105 105) !important;
+}
+
+textarea::placeholder {
+  color: rgb(115, 115, 115);
+  font-size: 14px;
+  padding-top: 3px;
 }

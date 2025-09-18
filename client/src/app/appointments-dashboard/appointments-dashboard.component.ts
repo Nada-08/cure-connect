@@ -27,8 +27,8 @@ export class AppointmentsDashboardComponent {
 
   monthDays: number[] = [];
   blankDays: number[] = [];
-  year = 2025;
-  month = 0;
+  year = new Date().getFullYear();
+  month = new Date().getMonth();
   months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -42,15 +42,13 @@ export class AppointmentsDashboardComponent {
 
   this.appointmentRequestService.getAppointments().subscribe({
     next: (data: any) => {
-      this.appointments = data.appointments.map((a: any) => {
-        console.log(a.doctorId.userId.name); // log before returning
-        return {
-          ...a,
-          date: new Date(a.date),
-          userName: typeof a.userId === 'string' ? 'Current User' : a.userId?.name,
-          doctorName: typeof a.doctorId.userId.name === 'string' ?  a.doctorId.userId.name : 'Unknown Doctor'
-        };
-      });
+      this.appointments = data.appointments.map((a: any) => ({
+  ...a,
+  date: new Date(a.date),
+  userName: a.userId?.name || 'Current User',
+  doctorName: a.doctorId?.userId?.name || 'Unknown Doctor'
+}));
+
     
       this.filterAppointments();
       this.generateCalendar();
@@ -87,18 +85,18 @@ export class AppointmentsDashboardComponent {
   }
 
   cancelAppointment(id: string): void {
-    if (!id) return;
+  if (!id) return;
 
-    this.appointmentRequestService.deleteAppointment(id).subscribe({
-      next: () => {
-        this.appointments = this.appointments.filter(a => a._id !== id);
-        this.filterAppointments();
-        this.updateStats();
-        console.log(`Appointment ${id} canceled successfully`);
-      },
-      error: (err) => console.error('Error canceling appointment:', err),
-    });
-  }
+  this.appointmentRequestService.deleteAppointment(id).subscribe({
+    next: () => {
+      this.appointments = this.appointments.filter(a => a._id !== id);
+      this.filterAppointments();
+      this.updateStats();
+      console.log(`Appointment ${id} canceled successfully`);
+    },
+    error: (err) => console.error('Error canceling appointment:', err),
+  });
+}
 
   getAppointmentsForDay(day: number) {
     return this.appointments.filter(
@@ -144,4 +142,8 @@ export class AppointmentsDashboardComponent {
         appt.date.getDate() === day
     );
   }
+  updateAppointment(id: string): void {
+  
+}
+
 }

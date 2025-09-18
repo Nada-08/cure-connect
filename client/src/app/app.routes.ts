@@ -25,8 +25,17 @@ export const routes: Routes = [
         title: 'Sign Up'
     },
     {
-        path: 'categories',
-        component: CategoryPageComponent
+        path: 'category-page',
+        // path: 'category-page/:specialization'
+        component: CategoryPageComponent,
+        title:"category-page",
+        children: [
+            {
+                path: 'create-appointment',
+                component: CreateAppointmentComponent,
+                title: 'New Appointment'
+            }
+        ]
     },
     {
         path: 'appointments',
@@ -34,19 +43,14 @@ export const routes: Routes = [
         title: 'Appointments'
     },
     {
-        path: 'create-appointment',
-        component: CreateAppointmentComponent,
-        title: 'New Appointment'
-    },
-    {
         path: 'update-appointment',
-        // path: 'update-appointment/:appointmentId', 
+        // path: 'update-appointment/:appointmentId',
         component: UpdateAppointmentComponent,
         title: 'Update Appointment'
     },
     {
         path: '**',
-        component: NotFoundComponent, 
+        component: NotFoundComponent,
         title: 'Page Not Found'
     }
 ];
