@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Appointment } from '../types/appointment';
 import { AppointmentRequestService } from '../services/appointment-request.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-appointments-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './appointments-dashboard.component.html',
   styleUrls: ['./appointments-dashboard.component.css'],
 })
@@ -35,28 +36,28 @@ export class AppointmentsDashboardComponent {
   ];
   weekdays = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
-  constructor(private appointmentRequestService: AppointmentRequestService) {}
+  constructor(private appointmentRequestService: AppointmentRequestService) { }
 
   ngOnInit(): void {
-  this.generateCalendar();
+    this.generateCalendar();
 
-  this.appointmentRequestService.getAppointments().subscribe({
-    next: (data: any) => {
-      this.appointments = data.appointments.map((a: any) => ({
-  ...a,
-  date: new Date(a.date),
-  userName: a.userId?.name || 'Current User',
-  doctorName: a.doctorId?.userId?.name || 'Unknown Doctor'
-}));
+    this.appointmentRequestService.getAppointments().subscribe({
+      next: (data: any) => {
+        this.appointments = data.appointments.map((a: any) => ({
+          ...a,
+          date: new Date(a.date),
+          userName: a.userId?.name || 'Current User',
+          doctorName: a.doctorId?.userId?.name || 'Unknown Doctor'
+        }));
 
-    
-      this.filterAppointments();
-      this.generateCalendar();
-      this.updateStats();
-    },
-    error: (err) => console.error('Error fetching appointments:', err),
-  });
-}
+
+        this.filterAppointments();
+        this.generateCalendar();
+        this.updateStats();
+      },
+      error: (err) => console.error('Error fetching appointments:', err),
+    });
+  }
 
 
   filterAppointments(): void {
@@ -85,18 +86,18 @@ export class AppointmentsDashboardComponent {
   }
 
   cancelAppointment(id: string): void {
-  if (!id) return;
+    if (!id) return;
 
-  this.appointmentRequestService.deleteAppointment(id).subscribe({
-    next: () => {
-      this.appointments = this.appointments.filter(a => a._id !== id);
-      this.filterAppointments();
-      this.updateStats();
-      console.log(`Appointment ${id} canceled successfully`);
-    },
-    error: (err) => console.error('Error canceling appointment:', err),
-  });
-}
+    this.appointmentRequestService.deleteAppointment(id).subscribe({
+      next: () => {
+        this.appointments = this.appointments.filter(a => a._id !== id);
+        this.filterAppointments();
+        this.updateStats();
+        console.log(`Appointment ${id} canceled successfully`);
+      },
+      error: (err) => console.error('Error canceling appointment:', err),
+    });
+  }
 
   getAppointmentsForDay(day: number) {
     return this.appointments.filter(
@@ -142,8 +143,12 @@ export class AppointmentsDashboardComponent {
         appt.date.getDate() === day
     );
   }
-  updateAppointment(id: string): void {
-  
-}
+  selectedAppointment: Appointment | null = null;
+  showModal = false;
+
+  updateAppointment(appt: Appointment): void {
+    this.selectedAppointment = appt;  // store the full object
+    this.showModal = true;             // open modal
+  }
 
 }

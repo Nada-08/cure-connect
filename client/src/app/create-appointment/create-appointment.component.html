@@ -1,75 +1,58 @@
-<div class="modal-backdrop d-flex justify-content-center align-items-center">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content rounded-4 shadow border-0">
-
-            <div class="modal-header bg-primary text-white rounded-top-4">
-                <h5 class="modal-title">New Appointment</h5>
-                <button type="button" class="btn-close btn-close-white" (click)="closeForm()"></button>
-            </div>
-
-            <div class="modal-body p-4 bg-light">
-                <form (ngSubmit)="saveAppointment()">
-
-                    <div class="row g-3">
-
-                        <!-- Doctor -->
-                        <div *ngIf="doctor" class="card border-0 shadow-sm mb-4">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="ms-3">
-                                        <h5 class="mb-0 fw-bold text-primary">Dr. {{ doctor.name }}</h5>
-                                        <small class="text-muted">{{ doctor.specialization }}</small>
-                                    </div>
-                                </div>
-
-                                <p class="mb-2"><i class="fa-solid fa-circle-info text-primary me-2"></i>
-                                    <strong>Description:</strong> {{ doctor.description }}
-                                </p>
-
-                                <p class="mb-0">
-                                    <i class="fa-solid fa-calendar-days text-primary me-2"></i>
-                                    <strong>Available Days:</strong>
-                                    <span *ngFor="let day of doctor.availableDay"
-                                        class="badge bg-primary-subtle text-primary rounded-pill me-1">
-                                        {{ day }}
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-
-
-                        <!-- Date -->
-                        <mat-form-field appearance="fill" class="w-100">
-                            <mat-label>Date</mat-label>
-                            <input matInput [matDatepicker]="picker" [(ngModel)]="appointment.date"
-                                [matDatepickerFilter]="dateFilter" [min]="minDate" name="date" required>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-
-                        <small *ngIf="dateError" class="text-danger">{{ dateError }}</small>
-
-
-                        <!-- Status -->
-                        <div class="mt-3">
-                            <label class="form-label fw-semibold">Status</label>
-                            <div class="form-control rounded-pill shadow-sm bg-light d-flex align-items-center">
-                                <span class="me-2">⏳</span> Pending
-                            </div>
-                        </div>
-
-
-                        <div class="mt-4 d-flex justify-content-end gap-2">
-                            <button type="button" class="btn btn-outline-secondary rounded-pill px-4"
-                                (click)="closeForm()">Cancel</button>
-                            <button type="submit" class="btn btn-success rounded-pill px-4">Save</button>
-                        </div>
-
-                    </div>
-
-                </form>
-            </div>
-
+<div class="fullpage-container">
+    <div class="fullpage-card">
+        <div class="card-header">
+            <h5>{{ existingAppointment ? 'Edit Appointment' : 'New Appointment' }}</h5>
+            <button type="button" class="btn-close btn-close-white" (click)="closeForm()"></button>
         </div>
+        <div class="card-body">
+            <form (ngSubmit)="saveAppointment()">
+
+                <!-- Doctor Info -->
+                <div *ngIf="doctor" class="mb-4">
+                    <h5 class="fw-bold text-primary">Dr. {{ doctor.name }}</h5>
+                    <small class="text-muted">{{ doctor.specialization }}</small>
+                    <p class="mt-2"><i class="fa-solid fa-circle-info text-primary me-2"></i>
+                        <strong>Description:</strong> {{ doctor.description }}
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-calendar-days text-primary me-2"></i>
+                        <strong>Available Days:</strong>
+                        <span *ngFor="let day of doctor.availableDay"
+                            class="badge bg-primary-subtle text-primary rounded-pill me-1">
+                            {{ day }}
+                        </span>
+                    </p>
+                </div>
+
+                <!-- Date Picker -->
+                <mat-form-field appearance="fill" class="w-100 mb-3">
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="appointment.date"
+                        [matDatepickerFilter]="dateFilter" [min]="minDate" name="date" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <small *ngIf="dateError" class="text-danger">{{ dateError }}</small>
+
+                <!-- Status -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Status</label>
+                    <div class="form-control rounded-pill shadow-sm bg-light d-flex align-items-center">
+                        <span class="me-2">⏳</span> {{ appointment.status | titlecase }}
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4"
+                        (click)="closeForm()">Cancel</button>
+                    <button type="submit" class="btn btn-success rounded-pill px-4">{{ existingAppointment ?
+                        'Update' : 'Save' }}</button>
+                </div>
+
+            </form>
+        </div>
+
+
     </div>
 </div>

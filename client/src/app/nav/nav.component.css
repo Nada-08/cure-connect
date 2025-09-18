@@ -1,0 +1,43 @@
+/* start nav */
+nav .nav {
+    background-color:var(--nav-color);
+    box-shadow:  0px 0px 20px rgba(0, 0, 0, 0.279);
+    height: 70px;
+    width:200vh;
+    z-index: 2;
+
+    border-radius: 50px !important
+}
+.container ul li{
+    padding: 10px;
+    font-size: 120%;
+    font-weight: 700;
+}
+
+.btn-container button{
+    border-radius: 50% !important;
+    height:50px;
+    width:50px;
+    background-color: var(--nav-color);
+    border: none;
+    box-shadow: 0 0 20px var(--shadow-color);
+}
+.nav-link ul li a{
+color: var(--nav-color);
+}
+.nav-link .logopic{
+    height: 50px;
+    margin-right: 5rem;
+}
+/* end nav */
+@media (max-width: 991px) {
+  nav .nav {
+    width: 18vh;
+    height: 90vh;
+    margin-left: 1.5rem !important;
+    position: fixed;
+    left: 0;
+    top: 95px;
+    transition: all 0.3s ease-in-out;
+  }
+}

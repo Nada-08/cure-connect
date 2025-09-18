@@ -84,14 +84,15 @@
             <button class="cancel-btn bg-danger" (click)="cancelAppointment(appointment._id!)">
               Cancel
             </button>
-            <button class="update-btn bg-primary ms-2" (click)="updateAppointment(appointment._id!)">
+            <button class="update-btn bg-primary ms-2" [routerLink]="['/create-appointment']"
+              [queryParams]="{ appointmentId: appointment._id }">
               Update
             </button>
           </div>
         </div>
       </div>
     </div>
-<!-- 
+    <!-- 
     <button class="btn-appt">View All</button> -->
   </div>
 
@@ -124,9 +125,9 @@
                 'bg-warning text-dark': appt.status === 'pending',
                 'bg-danger': appt.status === 'canceled'
               }">
-            Dr: {{ appt.doctorName || 'Unknown Doctor' }}
-            Patient: {{ appt.userName || 'Unknown Patient' }}
-          </span>
+              Dr: {{ appt.doctorName || 'Unknown Doctor' }}
+              Patient: {{ appt.userName || 'Unknown Patient' }}
+            </span>
 
           </div>
         </div>

@@ -1,0 +1,60 @@
+.container{
+  background-color: var( --header-bg-color);
+  width: 90vh;
+  height: 60vh;
+    clip-path: polygon(0% 0%, 180% 28%, 92% 75%, 51% 98%, 0% 68%, 0% 25%);
+display: flex;
+   margin: 1rem 7rem;
+flex-direction: column;
+position: relative;
+left:21%;
+
+  /* border-radius: 0% 20% 0% 50%; */
+}
+.container h1{
+  position: relative;
+    left: 5%;
+    top: 10%;
+}
+.container h1 span{
+  color: var( --text--other-color);
+}
+.container p{
+  margin-top: 4rem;
+    /* margin-bottom: 3rem; */
+    margin-left: 1.9rem;
+}
+.container button{
+  border: none;
+  width: 7rem;
+  height: 3rem;
+   margin-top: 2rem;
+    margin-left: 2rem;
+  border-radius: 16px;
+  color: var(--text-color);
+  font-weight: bold;
+  background-color: var(--second-main-color);
+}
+.container button:hover{
+  background-color: var(--main-color);
+}
+
+.outer_container {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+
+}
+
+.image {
+  position: relative;
+  overflow: hidden;
+  height: 350px;
+}
+
+.image img {
+  position: relative;
+  height:500px;
+  left: 17%;
+  top:0%;
+}

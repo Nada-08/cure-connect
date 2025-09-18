@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Appointment } from '../types/appointment';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AppointmentRequestService {
   constructor(private http: HttpClient) { }
 
   private getAuthHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Y2FiNDEwNmI3MTFmYjE2NzgyYTUzNyIsImlhdCI6MTc1ODE0NjIxMSwiZXhwIjoxNzU4MjMyNjExfQ.8oW7KrTw-NSDFXoi_tnCJiZGuoRB6MOEnY2pnfQF0cI'; 
+    const token = localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Y2FiNDEwNmI3MTFmYjE2NzgyYTUzNyIsImlhdCI6MTc1ODE0NjIxMSwiZXhwIjoxNzU4MjMyNjExfQ.8oW7KrTw-NSDFXoi_tnCJiZGuoRB6MOEnY2pnfQF0cI';
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,
@@ -22,8 +22,13 @@ export class AppointmentRequestService {
   }
 
   getAppointments(): Observable<Appointment[]> {
-
     return this.http.get<Appointment[]>(`${this.apiUrl}/users/my-appointments`, this.getAuthHeaders());
+  }
+
+  getAppointmentById(patientId: string): Observable<Appointment> {
+    return this.http.get<{ appointment: Appointment }>(`${this.apiUrl}/patients/${patientId}`, this.getAuthHeaders()).pipe(
+      map(res => res.appointment) // unwrap here
+    );
   }
 
   addAppointment(data: Appointment): Observable<any> {
@@ -35,6 +40,6 @@ export class AppointmentRequestService {
   }
 
   deleteAppointment(id: string): Observable<any> {
-    return this.http.delete(`http://localhost:3000/api/users/${id}`, this.getAuthHeaders());
+    return this.http.delete(`${this.apiUrl}/users/${id}`, this.getAuthHeaders());
   }
 }

@@ -28,25 +28,17 @@ export const routes: Routes = [
         path: 'category-page',
         // path: 'category-page/:specialization'
         component: CategoryPageComponent,
-        title:"category-page",
-        children: [
-            {
-                path: 'create-appointment',
-                component: CreateAppointmentComponent,
-                title: 'New Appointment'
-            }
-        ]
+        title: "category-page",
     },
     {
         path: 'appointments',
         component: AppointmentsDashboardComponent,
-        title: 'Appointments'
+        title: 'Appointments',
     },
     {
-        path: 'update-appointment',
-        // path: 'update-appointment/:appointmentId',
-        component: UpdateAppointmentComponent,
-        title: 'Update Appointment'
+        path: 'create-appointment',
+        component: CreateAppointmentComponent,
+        title: 'New Appointment'
     },
     {
         path: '**',

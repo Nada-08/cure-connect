@@ -21,7 +21,7 @@ export class DoctorsRequestService {
     return this.http.get<Doctors[]>('http://localhost:3000/api/admin/doctors', { headers });
   }
 
-  getDoctorById(doctorId: string): Observable<Doctors> {
+  getDoctorById(doctorId: any): Observable<Doctors> {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Y2FiNDU3NmI3MTFmYjE2NzgyYTUzZCIsImlhdCI6MTc1ODEzNzY0OCwiZXhwIjoxNzU4MjI0MDQ4fQ.mTQkCpjW6aXC6uGGMLOabefHrFHXWoz1LmTOcjq6ZO8';
 
     const headers = new HttpHeaders({

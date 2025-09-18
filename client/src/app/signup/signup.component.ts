@@ -27,10 +27,10 @@ export class SignupComponent {
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
       specialization: [''],
+      licenseNum: ['', [Validators.required, Validators.minLength(5)]],
       description: ['']
     });
 
-    // Adjust validators for doctor role
     this.signup.get('role')?.valueChanges.subscribe(role => {
       if (role === 'doctor') {
         this.signup.get('specialization')?.setValidators([Validators.required]);
@@ -44,12 +44,10 @@ export class SignupComponent {
     });
   }
 
-  // Handle avatar file selection
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0] || null;
   }
 
-  // Handle day checkbox toggle
   toggleDay(day: string) {
     if (this.availableDays.includes(day)) {
       this.availableDays = this.availableDays.filter(d => d !== day);
@@ -58,10 +56,8 @@ export class SignupComponent {
     }
   }
 
-
   handleSubmit() {
     this.submitted = true;
-
     if (this.signup.value.password !== this.signup.value.confirmPassword) {
       alert('Passwords do not match');
       return;
@@ -70,23 +66,19 @@ export class SignupComponent {
     if (this.signup.valid) {
       const formData = new FormData();
       const values = this.signup.value;
-
       formData.append('name', values.name);
       formData.append('email', values.email);
       formData.append('phone', values.phone);
       formData.append('password', values.password);
       formData.append('role', values.role);
-
       if (values.role === 'doctor') {
         formData.append('specialization', values.specialization);
         formData.append('description', values.description);
         formData.append('availableDay', JSON.stringify(this.availableDays));
       }
-
       if (this.selectedFile) {
         formData.append('avatar', this.selectedFile);
       }
-
       this.authService.signup(formData).subscribe({
         next: (res: any) => {
           console.log('Signup success:', res);

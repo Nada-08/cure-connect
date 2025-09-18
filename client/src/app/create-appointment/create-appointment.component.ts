@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // <-- import Router
+import { Router } from '@angular/router';
 import { Appointment } from '../types/appointment';
 import { AppointmentRequestService } from '../services/appointment-request.service';
 import { Doctors } from '../types/doctors';
@@ -19,11 +19,12 @@ import { UserRequestService } from '../services/user-request.service';
   styleUrl: './create-appointment.component.css'
 })
 export class CreateAppointmentComponent {
-
   @Input() showForm: boolean = true;
   @Input() doctorId?: string;
+  @Input() appointmentId?: string;
 
   doctor?: Doctors;
+  existingAppointment: boolean = false;
 
   dayMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   dateError: string | null = null;
@@ -43,33 +44,66 @@ export class CreateAppointmentComponent {
     private appointmentRequestService: AppointmentRequestService,
     private doctorsRequestService: DoctorsRequestService,
     private userRequestService: UserRequestService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit() {
-
     this.userRequestService.getLoggedInUser().subscribe({
       next: (user) => {
-        this.appointment.userId = user._id;
+        this.appointment.userId = typeof user._id === 'string' ? user._id : user._id.toString();
+
+        if (this.appointmentId) {
+          this.existingAppointment = true;
+          this.appointmentRequestService.getAppointmentById(this.appointmentId).subscribe({
+            next: (appt) => {
+              this.appointment = {
+                ...appt,
+                doctorId: typeof appt.doctorId === 'string' ? appt.doctorId : appt.doctorId._id,
+                userId: typeof appt.userId === 'string' ? appt.userId : appt.userId._id,
+                date: new Date(appt.date),
+              };
+
+              this.doctorId = typeof appt.doctorId === 'string' ? appt.doctorId : appt.doctorId._id;
+
+              if (this.doctorId) {
+                this.doctorsRequestService.getDoctorById(this.doctorId).subscribe({
+                  next: (doctor: Doctors) => this.doctor = doctor,
+                  error: (err) => console.error('Error fetching doctor info', err)
+                });
+              }
+            },
+            error: (err) => console.error('Failed to load appointment', err)
+          });
+        } else if (this.doctorId) {
+          // if doctorId is passed via @Input() and no appointmentId
+          this.doctorsRequestService.getDoctorById(this.doctorId).subscribe({
+            next: (doctor: Doctors) => this.doctor = doctor,
+            error: (err) => console.error('Error fetching doctor info', err)
+          });
+        }
       },
       error: (err) => {
         console.error('Failed to get logged-in user', err);
         this.router.navigate(['/login']);
       }
-    })
-
-    if (this.doctorId) {
-      this.doctorsRequestService.getDoctorById(this.doctorId).subscribe({
-        next: (doctor: Doctors) => {
-          this.doctor = doctor;
-          console.log(this.doctor)
-        },
-        error: (err) => {
-          console.error('Error fetching doctor info', err);
-        }
-      });
-    }
+    });
   }
+
+
+
+  private loadLoggedInUser() {
+    this.userRequestService.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.appointment.userId = typeof user._id === 'string' ? user._id : user._id.toString();
+      },
+      error: () => {
+        console.error('Failed to get logged-in user');
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
 
   saveAppointment() {
     if (!this.appointment.userId) {
@@ -81,22 +115,37 @@ export class CreateAppointmentComponent {
       return;
     }
 
-    this.appointment.doctorId = this.doctorId!;
+    this.appointment.doctorId = this.doctorId;
 
-    this.appointmentRequestService.addAppointment(this.appointment).subscribe({
-      next: (res) => {
-        console.log('Appointment created:', res);
-        this.appointmentCreated.emit(res);
-        this.resetForm();
-        this.closeForm();
-      },
-      error: (err) => {
-        console.error('Error creating appointment', err);
-        alert('Failed to create appointment. Please try again.');
-      }
-    });
+    if (this.appointmentId) {
+      // 🔹 update existing appointment
+      this.appointmentRequestService.updateAppointment(this.appointmentId, this.appointment).subscribe({
+        next: (res) => {
+          console.log('Appointment updated:', res);
+          this.appointmentCreated.emit(res);
+          this.closeForm();
+        },
+        error: (err) => {
+          console.error('Error updating appointment', err);
+          alert('Failed to update appointment. Please try again.');
+        }
+      });
+    } else {
+      // 🔹 create new appointment
+      this.appointmentRequestService.addAppointment(this.appointment).subscribe({
+        next: (res) => {
+          console.log('Appointment created:', res);
+          this.appointmentCreated.emit(res);
+          this.resetForm();
+          this.closeForm();
+        },
+        error: (err) => {
+          console.error('Error creating appointment', err);
+          alert('Failed to create appointment. Please try again.');
+        }
+      });
+    }
   }
-
 
   dateFilter = (d: Date | null): boolean => {
     if (!d || !this.doctor) return false;
@@ -115,7 +164,7 @@ export class CreateAppointmentComponent {
 
   closeForm() {
     this.formClosed.emit();
-    this.router.navigate(['/category-page']);
+    this.location.back();
   }
 
   private resetForm() {

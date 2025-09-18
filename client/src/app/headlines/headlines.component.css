@@ -1,0 +1,8 @@
+.cont-headline {
+  display: flex;
+  flex-direction: column;
+
+}
+.cont-headline h2{
+  text-align: center;
+}
